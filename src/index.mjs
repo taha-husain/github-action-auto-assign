@@ -119,12 +119,15 @@ import {
         auth: GITHUB_TOKEN,
     });
 
+    const options = process.env.OPTIONS;
+
     await task(
         octokitClient,
         GITHUB_REPOSITORY,
         issueNumber,
         currentAssignee,
-        nextAssignee
+        nextAssignee,
+        options
     );
 })().catch((e) => {
     console.error(e);

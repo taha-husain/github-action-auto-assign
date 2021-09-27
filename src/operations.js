@@ -94,7 +94,8 @@ export async function assignReviewer(
     repoName,
     issueNum,
     currentAssignees,
-    nextAssignees
+    nextAssignees,
+    options
 ) {
     const [owner, repo] = repoName.split('/');
 
@@ -143,7 +144,11 @@ export async function assignReviewer(
         nextAssignees,
     ) : null;
 
-    await Promise.all([changeLabels, changeAssign, changeReviewer]);
+    await Promise.all([
+        changeLabels,
+        ...(options.ONLY_ASSIGNEES || options.BOTH ? [changeAssign] : []),
+        ...(options.ONLY_REVIEWERS || options.BOTH ? [changeReviewer] : [])
+    ]);
 }
 
 /**
