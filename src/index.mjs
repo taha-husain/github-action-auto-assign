@@ -119,7 +119,7 @@ import {
         auth: GITHUB_TOKEN,
     });
 
-    const options = process.env.OPTIONS;
+    const options = process.env;
 
     await task(
         octokitClient,
