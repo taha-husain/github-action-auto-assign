@@ -11,8 +11,6 @@ import {
 } from './parser/index.js';
 import {
     assignReviewer,
-    acceptPullRequest,
-    rejectPullRequest
 } from './operations.js';
 
 (async function main() {
