@@ -103,14 +103,6 @@ import {
             nextAssignee = command.target;
             task = assignReviewer;
             break;
-        case CommandType.AcceptPullRequest:
-            nextAssignee = [issueCreator];
-            task = acceptPullRequest;
-            break;
-        case CommandType.RejectPullRequest:
-            nextAssignee = [issueCreator];
-            task = rejectPullRequest;
-            break;
         default:
             throw new RangeError(JSON.stringify(command));
     }
