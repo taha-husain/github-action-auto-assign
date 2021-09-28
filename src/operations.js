@@ -98,7 +98,8 @@ export async function assignReviewer(
     nextAssignees,
     options,
 ) {
-    console.log(options);
+    console.log("only review", options.ONLY_REVIEWERS || options.BOTH);
+    console.log("only assign", options.ONLY_ASSIGNEES || options.BOTH);
     const [owner, repo] = repoName.split('/');
 
     const response = await aOctoKit.issues.listLabelsOnIssue({
