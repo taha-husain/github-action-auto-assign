@@ -88,6 +88,7 @@ async function replaceReviewRequests(
  * @param {number} issueNum
  * @param {Array<string>} currentAssignees
  * @param {Array<string>} nextAssignees
+ * @param {Object} options
  */
 export async function assignReviewer(
     aOctoKit,
@@ -95,8 +96,9 @@ export async function assignReviewer(
     issueNum,
     currentAssignees,
     nextAssignees,
-    options
+    options,
 ) {
+    console.log(options);
     const [owner, repo] = repoName.split('/');
 
     const response = await aOctoKit.issues.listLabelsOnIssue({
