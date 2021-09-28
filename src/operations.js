@@ -1,4 +1,3 @@
-import { removeStateLabels } from './labels.js';
 import { isPullRequest } from './pulls.js';
 
 /**
@@ -55,26 +54,6 @@ export async function assignReviewer(
 ) {
     const [owner, repo] = repoName.split('/');
 
-    const response = await aOctoKit.issues.listLabelsOnIssue({
-        owner,
-        repo,
-        // eslint-disable-next-line camelcase
-        issue_number: issueNum,
-    });
-
-    const labels = response.data;
-
-    const bleached = removeStateLabels(labels);
-    bleached.push('S-awaiting-review');
-
-    const changeLabels = aOctoKit.issues.replaceLabels({
-        owner,
-        repo,
-        // eslint-disable-next-line camelcase
-        issue_number: issueNum,
-        labels: bleached
-    });
-
     const issueIsPullRequest = await isPullRequest(
         aOctoKit,
         owner,
@@ -91,8 +70,5 @@ export async function assignReviewer(
         nextAssignees,
     ) : null;
 
-    await Promise.all([
-        changeLabels,
-        changeReviewer,
-    ]);
+    await Promise.all([changeReviewer]);
 }
